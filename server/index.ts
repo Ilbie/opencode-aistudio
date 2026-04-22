@@ -196,5 +196,5 @@ if (!isProduction) {
 }
 
 httpServer.listen(port, "0.0.0.0", () => {
-  console.log(`Repovera AI Studio listening on http://localhost:${port}`);
+  console.log(`opencode-aistudio listening on http://localhost:${port}`);
 });

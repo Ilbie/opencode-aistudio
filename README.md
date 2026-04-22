@@ -1,6 +1,6 @@
-# Repovera AI Studio Playground
+# opencode-aistudio
 
-Repovera AI Studio is a local large-context playground for OpenCode-backed model runs. It supports file attachments, model/provider selection, streaming output, separate thoughts rendering, and local run history.
+opencode-aistudio is a local large-context playground for OpenCode-backed model runs. It supports file attachments, model/provider selection, streaming output, separate thoughts rendering, and local run history.
 
 The UI supports English and Korean through the sidebar language toggle.
 
@@ -80,7 +80,7 @@ npm run clean
 
 ## Product Scope
 
-Repovera AI Studio is not an autonomous agent interface. The main workflow is:
+opencode-aistudio is not an autonomous agent interface. The main workflow is:
 
 1. Upload or paste a large context.
 2. Pick a provider/model.

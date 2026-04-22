@@ -770,7 +770,7 @@ function fallbackMimeType(type: ContextAttachment["type"]) {
 function buildSystem(playground: Playground) {
   return [
     playground.systemInstruction?.trim(),
-    "You are running inside a large-context AI Studio playground. Analyze only the attached context and the user task unless the user asks otherwise.",
+    "You are running inside a large-context opencode-aistudio playground. Analyze only the attached context and the user task unless the user asks otherwise.",
     "Keep internal reasoning separate from final Markdown output when the model exposes reasoning parts.",
     buildRunSettingsBlock(playground.runSettings),
   ]
@@ -1027,7 +1027,7 @@ export async function collectStreamingPromptResponse({
   try {
     const { client, runtime } = await startManagedOpencodeServer();
     const sessionResult = await client.session.create({
-      title: `AI Studio Run ${new Date().toLocaleString()}`,
+      title: `opencode-aistudio Run ${new Date().toLocaleString()}`,
       directory: runtime.workspaceDir,
     });
     const session = unwrapSdkData(sessionResult, "session.create");

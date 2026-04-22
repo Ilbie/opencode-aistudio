@@ -41,9 +41,9 @@ export function Sidebar({
     <div className="w-[260px] flex-shrink-0 flex flex-col border-r border-[#646262] bg-[#1a1818] h-full overflow-y-auto">
       <div className="p-4 border-b border-[#646262]">
         <div className="flex items-center justify-between gap-3">
-          <h1 className="text-[16px] font-bold tracking-tighter uppercase text-brand-light flex items-center gap-2">
+          <h1 className="text-[13px] font-bold text-brand-light flex items-center gap-2">
             <span className="w-4 h-4 bg-brand-accent rounded-sm inline-block"></span>
-            AI Studio
+            opencode-aistudio
           </h1>
           <LanguageToggle language={language} onChange={setLanguage} />
         </div>
