@@ -30,6 +30,45 @@ body {
   overflow: hidden;
 }
 
+* {
+  scrollbar-color: #747171 #181616;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #181616;
+}
+
+*::-webkit-scrollbar-thumb {
+  min-height: 44px;
+  background: #747171;
+  border: 2px solid #181616;
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #a5a1a1;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background: var(--color-brand-accent);
+}
+
+*::-webkit-scrollbar-corner {
+  background: #181616;
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 .markdown-body {
   overflow-wrap: anywhere;
 }
