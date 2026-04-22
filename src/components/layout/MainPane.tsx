@@ -3,6 +3,7 @@ import { PromptComposer } from "../features/PromptComposer";
 import { ContextAttachmentsPanel } from "../features/ContextAttachmentsPanel";
 import { Playground, RunResult } from "../../lib/playground";
 import { useI18n } from "../../lib/i18n";
+import { useRunElapsedLabel } from "../../lib/runTiming";
 
 type MainPaneProps = {
   playground: Playground;
@@ -91,6 +92,7 @@ function PlaygroundHeader({
 }: Pick<MainPaneProps, "playground" | "displayedRun" | "totalTokens" | "contextLimit" | "onTitleChange">) {
   const { t } = useI18n();
   const status = displayedRun?.status ?? "idle";
+  const elapsedLabel = useRunElapsedLabel(displayedRun);
   const statusLabel =
     status === "running"
       ? t("status.running")
@@ -127,6 +129,9 @@ function PlaygroundHeader({
             }`}
           />
           <span className="text-[12px] opacity-80 uppercase tracking-tighter">{statusLabel}</span>
+          {elapsedLabel ? (
+            <span className="text-[12px] text-brand-mid tabular-nums">{elapsedLabel}</span>
+          ) : null}
         </div>
       </div>
     </header>

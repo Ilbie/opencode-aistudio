@@ -12,6 +12,7 @@ import {
 import Markdown from "react-markdown";
 import { Playground, RunResult, formatTime } from "../../lib/playground";
 import { useI18n } from "../../lib/i18n";
+import { useRunElapsedLabel } from "../../lib/runTiming";
 
 const USER_PREVIEW_LIMIT = 1_200;
 const THOUGHTS_PREVIEW_LIMIT = 2_000;
@@ -167,6 +168,7 @@ function AssistantMessage({
   const visibleMarkdown = expanded ? markdownContent : truncateAtBoundary(markdownContent, FINAL_PREVIEW_LIMIT).text;
   const isTruncated = markdownContent.length > visibleMarkdown.length;
   const hasPartialContent = Boolean(run.finalText.trim() || run.thoughtsText.trim());
+  const elapsedLabel = useRunElapsedLabel(run);
 
   return (
     <section className="w-full max-w-[960px] self-center rounded-[4px] border border-[#646262] bg-[#1a1818]">
@@ -178,7 +180,11 @@ function AssistantMessage({
           </span>
           <span>{formatTime(run.completedAt ?? run.startedAt, language)}</span>
           {status === "running" ? (
-            <span className="text-brand-warning">{t("conversation.streaming")}</span>
+            <span className="text-brand-warning tabular-nums">
+              {t("conversation.streaming")} {elapsedLabel}
+            </span>
+          ) : elapsedLabel ? (
+            <span className="text-brand-mid tabular-nums">{elapsedLabel}</span>
           ) : null}
         </div>
         <MessageMenu
