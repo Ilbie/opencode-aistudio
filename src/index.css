@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-dark: #201d1d;
+  --color-brand-light: #fdfcfc;
+  --color-brand-mid: #9a9898;
+  --color-brand-surface-dark: #302c2c;
+  --color-brand-surface-light: #f1eeee;
+  --color-brand-border-gray: #646262;
+  --color-brand-border-warm: rgba(15, 0, 0, 0.12);
+  --color-brand-border-dark: rgba(253, 252, 252, 0.12);
+  --color-brand-accent: #007aff;
+  --color-brand-accent-hover: #0056b3;
+  --color-brand-danger: #ff3b30;
+  --color-brand-success: #30d158;
+  --color-brand-warning: #ff9f0a;
+  --color-brand-text-muted: #6e6e73;
+  --color-brand-text-secondary: #424245;
+
+  --font-mono: "Berkeley Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+body {
+  background-color: var(--color-brand-dark);
+  color: var(--color-brand-light);
+  font-family: var(--font-mono);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.markdown-body {
+  overflow-wrap: anywhere;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+.markdown-body p {
+  margin-bottom: 16px;
+}
+.markdown-body pre {
+  background-color: #151313;
+  border: 1px solid var(--color-brand-border-gray);
+  border-radius: 4px;
+  padding: 16px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 24px;
+  color: #93c5fd;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.markdown-body code {
+  font-family: var(--font-mono);
+}
+.markdown-body p code {
+  background-color: var(--color-brand-surface-dark);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--color-brand-accent);
+}
