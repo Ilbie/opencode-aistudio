@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { Playground, RunResult } from "../packages/gateway-opencode/src/index";
+import { appConfig } from "../app-config";
 
 export type StoredRunResult = RunResult & {
   playground: Playground;
@@ -8,10 +9,10 @@ export type StoredRunResult = RunResult & {
 
 const DATA_DIR = path.resolve(process.cwd(), ".repovera-data");
 const HISTORY_FILE = path.join(DATA_DIR, "history.json");
-const MAX_HISTORY_ENTRIES = Number(process.env.REPOVERA_MAX_HISTORY_ENTRIES ?? 30);
-const STORED_FINAL_TEXT_LIMIT = Number(process.env.REPOVERA_STORED_FINAL_TEXT_LIMIT ?? 200_000);
-const STORED_THOUGHTS_TEXT_LIMIT = Number(process.env.REPOVERA_STORED_THOUGHTS_TEXT_LIMIT ?? 80_000);
-const STORED_ATTACHMENT_CONTENT_LIMIT = Number(process.env.REPOVERA_STORED_ATTACHMENT_CONTENT_LIMIT ?? 120_000);
+const MAX_HISTORY_ENTRIES = appConfig.history.maxEntries;
+const STORED_FINAL_TEXT_LIMIT = appConfig.history.storedFinalTextLimit;
+const STORED_THOUGHTS_TEXT_LIMIT = appConfig.history.storedThoughtsTextLimit;
+const STORED_ATTACHMENT_CONTENT_LIMIT = appConfig.history.storedAttachmentContentLimit;
 const HISTORY_PROMPT_PREVIEW_LIMIT = 2_000;
 const TRIM_NOTICE = "\n\n[Trimmed to reduce memory use.]";
 

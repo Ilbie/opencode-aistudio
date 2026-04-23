@@ -1,31 +1,12 @@
 import net from "node:net";
-
-const DEFAULT_PORT_START = 4097;
-const DEFAULT_PORT_END = 4197;
+import { appConfig } from "../../../app-config";
 
 function range(start: number, end: number) {
   return Array.from({ length: end - start + 1 }, (_value, index) => start + index);
 }
 
 function configuredPortRange() {
-  const explicitPorts = process.env.REPOVERA_OPENCODE_PORTS;
-  if (explicitPorts) {
-    const ports = explicitPorts
-      .split(",")
-      .map((value) => Number(value.trim()))
-      .filter((value) => Number.isInteger(value) && value > 0 && value < 65536);
-    if (ports.length > 0) {
-      return ports;
-    }
-  }
-
-  const start = Number(process.env.REPOVERA_OPENCODE_PORT_START ?? DEFAULT_PORT_START);
-  const end = Number(process.env.REPOVERA_OPENCODE_PORT_END ?? DEFAULT_PORT_END);
-  if (Number.isInteger(start) && Number.isInteger(end) && start > 0 && end >= start && end < 65536) {
-    return range(start, end);
-  }
-
-  return range(DEFAULT_PORT_START, DEFAULT_PORT_END);
+  return range(appConfig.opencode.portStart, appConfig.opencode.portEnd);
 }
 
 export async function isPortAvailable(port: number, hostname = "127.0.0.1") {

@@ -15,6 +15,7 @@ import {
   finalizeGatewayResponses,
   waitForStreamCompletion,
 } from "./stream-completion";
+import { appConfig } from "../../../app-config";
 
 export type ContextAttachment = {
   id: string;
@@ -129,8 +130,8 @@ export type CollectStreamingPromptResponseResult = RunResult & {
   sessionId?: string;
 };
 
-const GATEWAY_FINAL_TEXT_LIMIT = Number(process.env.REPOVERA_GATEWAY_FINAL_TEXT_LIMIT ?? 200_000);
-const GATEWAY_THOUGHTS_TEXT_LIMIT = Number(process.env.REPOVERA_GATEWAY_THOUGHTS_TEXT_LIMIT ?? 80_000);
+const GATEWAY_FINAL_TEXT_LIMIT = appConfig.gateway.finalTextLimit;
+const GATEWAY_THOUGHTS_TEXT_LIMIT = appConfig.gateway.thoughtsTextLimit;
 const GATEWAY_TRIM_NOTICE = "\n\n[Trimmed to reduce memory use.]";
 
 type ManagedRuntime = {
@@ -181,14 +182,14 @@ const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 
 function runtimeRoot() {
   return (
-    process.env.REPOVERA_OPENCODE_RUNTIME_DIR ??
+    appConfig.opencode.runtimeDir ??
     path.join(os.homedir(), ".repovera", "opencode-runtime")
   );
 }
 
 function resolveOpenCodeCommand() {
-  if (process.env.REPOVERA_OPENCODE_BIN) {
-    return process.env.REPOVERA_OPENCODE_BIN;
+  if (appConfig.opencode.binaryPath) {
+    return appConfig.opencode.binaryPath;
   }
 
   return path.join(
@@ -228,7 +229,7 @@ async function copyIfExists(source: string, destinations: string[]) {
 function findAuthCandidates(originalEnv = process.env) {
   const home = os.homedir();
   return uniqueStrings([
-    process.env.REPOVERA_OPENCODE_AUTH_JSON,
+    appConfig.opencode.authJsonPath,
     path.join(home, ".config", "opencode", "auth.json"),
     path.join(home, ".local", "share", "opencode", "auth.json"),
     path.join(home, ".opencode", "auth.json"),
@@ -276,9 +277,9 @@ export async function prepareManagedRuntime(): Promise<ManagedRuntime> {
     }
   }
 
-  const serverUsername = process.env.OPENCODE_SERVER_USERNAME || "opencode";
+  const serverUsername = appConfig.opencode.serverUsername;
   const serverPassword =
-    process.env.OPENCODE_SERVER_PASSWORD || crypto.randomBytes(24).toString("base64url");
+    appConfig.opencode.serverPassword || crypto.randomBytes(24).toString("base64url");
 
   const env: NodeJS.ProcessEnv = {
     ...process.env,
@@ -367,7 +368,7 @@ async function launchManagedOpencodeServer(runtime: ManagedRuntime, command: str
       settled = true;
       child.kill();
       reject(new Error(`Timeout waiting for OpenCode server on port ${port}\n${output}`));
-    }, Number(process.env.REPOVERA_OPENCODE_START_TIMEOUT_MS ?? 15_000));
+    }, appConfig.opencode.startTimeoutMs);
 
     const appendOutput = (chunk: Buffer) => {
       output += chunk.toString();
@@ -939,9 +940,9 @@ async function runCustomCommandFallback({
   onStart,
   onDelta,
 }: CollectStreamingPromptResponseOptions): Promise<CollectStreamingPromptResponseResult> {
-  const command = process.env.REPOVERA_OPENCODE_COMMAND;
+  const command = appConfig.opencode.command;
   if (!command) {
-    throw new Error("REPOVERA_OPENCODE_COMMAND is not configured");
+    throw new Error("opencode.command is not configured");
   }
 
   const runId = crypto.randomUUID();
@@ -1009,7 +1010,7 @@ export async function collectStreamingPromptResponse({
   onDelta,
   onError,
 }: CollectStreamingPromptResponseOptions): Promise<CollectStreamingPromptResponseResult> {
-  if (process.env.REPOVERA_OPENCODE_COMMAND) {
+  if (appConfig.opencode.command) {
     return runCustomCommandFallback({ playground, timeoutMs, onStart, onDelta, onError });
   }
 

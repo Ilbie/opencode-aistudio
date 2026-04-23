@@ -1,12 +1,8 @@
 import type { Event as OpenCodeEvent } from "@opencode-ai/sdk/v2";
+import { appConfig } from "../../../app-config";
 
-export const DEFAULT_GATEWAY_TIMEOUT_MS = Number(
-  process.env.GATEWAY_TIMEOUT_MS ?? 5 * 60 * 1000
-);
-
-export const DEFAULT_POST_PROMPT_IDLE_GRACE_MS = Number(
-  process.env.POST_PROMPT_IDLE_GRACE_MS ?? 5 * 60 * 1000
-);
+export const DEFAULT_GATEWAY_TIMEOUT_MS = appConfig.gateway.timeoutMs;
+export const DEFAULT_POST_PROMPT_IDLE_GRACE_MS = appConfig.gateway.postPromptIdleGraceMs;
 
 export type StreamCompletionReason = "idle" | "prompt-grace" | "stream-ended";
 

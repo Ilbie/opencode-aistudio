@@ -15,18 +15,19 @@ import {
   readHistorySummary,
   trimStoredRun,
 } from "./history-store";
+import { appConfig } from "../app-config";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
-const port = Number(process.env.PORT ?? 3000);
+const port = appConfig.server.port;
 const isProduction = process.env.NODE_ENV === "production";
-const SSE_FINAL_TEXT_LIMIT = Number(process.env.REPOVERA_SSE_FINAL_TEXT_LIMIT ?? 200_000);
-const SSE_THOUGHTS_TEXT_LIMIT = Number(process.env.REPOVERA_SSE_THOUGHTS_TEXT_LIMIT ?? 80_000);
+const SSE_FINAL_TEXT_LIMIT = appConfig.server.sseFinalTextLimit;
+const SSE_THOUGHTS_TEXT_LIMIT = appConfig.server.sseThoughtsTextLimit;
 
 const app = express();
 const httpServer = createHttpServer(app);
 app.disable("x-powered-by");
-app.use(express.json({ limit: process.env.REPOVERA_BODY_LIMIT ?? "100mb" }));
+app.use(express.json({ limit: appConfig.server.bodyLimit }));
 
 function writeSse(res: express.Response, event: string, data: unknown) {
   res.write(`event: ${event}\n`);

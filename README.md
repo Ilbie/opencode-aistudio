@@ -46,6 +46,12 @@ run.cmd
 
 The server listens on [http://localhost:3000](http://localhost:3000) by default.
 
+## Configuration
+
+App settings live in [`opencode-aistudio.yml`](./opencode-aistudio.yml) at the repository root.
+The file includes inline comments for each setting and replaces `.env`-style app configuration.
+Restart the dev/start server after changing it.
+
 ## Script Modes
 
 The run wrappers accept the same modes on every OS:
