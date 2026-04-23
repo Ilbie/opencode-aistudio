@@ -1,30 +1,60 @@
-# opencode-aistudio
+<div align="center">
+  <h1>opencode-aistudio</h1>
+  <p><strong>AI Studio-style codebase analysis for any OpenCode-backed provider.</strong></p>
+  <p>Paste Repomix output, attach project context, pick a model, and inspect streamed results locally.</p>
+</div>
 
-opencode-aistudio is a local large-context playground for OpenCode-backed model runs. It supports file attachments, model/provider selection, streaming output, separate thoughts rendering, and local run history.
+<p align="center">
+  <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.x-3178c6.svg">
+  <img alt="React" src="https://img.shields.io/badge/React-19-61dafb.svg">
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-6-646cff.svg">
+  <img alt="OpenCode" src="https://img.shields.io/badge/OpenCode-backed-111827.svg">
+  <img alt="Languages" src="https://img.shields.io/badge/docs-EN%20%7C%20KO-0f766e.svg">
+</p>
 
-The UI supports English and Korean through the sidebar language toggle.
+<p align="center">
+  <a href="./README.en.md"><strong>English</strong></a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="./README.ko.md"><strong>한국어</strong></a>
+</p>
 
-## Prerequisites
+---
 
-- Node.js 20+
-- npm
-- OpenCode authentication on the local machine
+## Overview
 
-If OpenCode auth is expired, run:
+opencode-aistudio is a local playground for the workflow many developers use with **Google AI Studio + Repomix**:
+
+1. Package a repository into one large context.
+2. Paste or attach that context.
+3. Ask an AI model to analyze architecture, bugs, implementation details, or migration plans.
+
+That flow is useful, but other AI playgrounds can make it awkward to switch providers, keep local history, attach large context, or inspect reasoning output. opencode-aistudio brings that workflow into an **OpenCode-based local app**.
+
+## Highlights
+
+- Large-context code analysis workflow
+- Repomix output and file attachment friendly
+- OpenCode provider/model catalog integration
+- Streaming final output and separated thoughts
+- Local run history
+- English/Korean UI
+- Root YAML configuration
+
+## Quick Start
+
+```bash
+git clone https://github.com/Ilbie/opencode-aistudio.git
+cd opencode-aistudio
+```
+
+If OpenCode auth has expired:
 
 ```bash
 opencode auth login
 ```
 
-No `.env` file is required.
-
-## Run
-
-Install dependencies once:
-
-```bash
-npm install
-```
+Run the app. The wrapper script installs npm dependencies automatically when `node_modules` is missing.
 
 Linux/macOS:
 
@@ -44,53 +74,21 @@ Windows Command Prompt:
 run.cmd
 ```
 
-The server listens on [http://localhost:3000](http://localhost:3000) by default.
+Default local URL:
+
+```text
+http://localhost:3000
+```
+
+## Documentation
+
+Choose a language:
+
+| Language | README |
+| --- | --- |
+| English | [README.en.md](./README.en.md) |
+| 한국어 | [README.ko.md](./README.ko.md) |
 
 ## Configuration
 
-App settings live in [`opencode-aistudio.yml`](./opencode-aistudio.yml) at the repository root.
-The file includes inline comments for each setting and replaces `.env`-style app configuration.
-Restart the dev/start server after changing it.
-
-## Script Modes
-
-The run wrappers accept the same modes on every OS:
-
-```bash
-./run.sh dev
-./run.sh build
-./run.sh preview
-./run.sh lint
-./run.sh start
-```
-
-On Windows, use `.\run.ps1 <mode>` or `run.cmd <mode>`.
-
-You can also use npm directly:
-
-```bash
-npm run dev
-npm run build
-npm run preview
-npm run lint
-npm run clean
-```
-
-## Architecture
-
-- `src/` contains the React playground UI.
-- `server/index.ts` serves the Vite app and exposes `/api/catalog`, `/api/history`, and `/api/run`.
-- `server/history-store.ts` persists local run history under `.repovera-data/history.json`.
-- `packages/gateway-opencode/src/index.ts` manages the isolated OpenCode runtime, starts `opencode serve`, queries providers/models, and streams prompt results.
-- `packages/gateway-opencode/src/stream-completion.ts` handles idle events, timeout handling, and partial response recovery.
-
-## Product Scope
-
-opencode-aistudio is not an autonomous agent interface. The main workflow is:
-
-1. Upload or paste a large context.
-2. Pick a provider/model.
-3. Adjust supported run settings.
-4. Run the prompt.
-5. Review thoughts separately from the final Markdown answer.
-6. Reopen past runs from History.
+Edit [`opencode-aistudio.yml`](./opencode-aistudio.yml) to change server, history, gateway, and managed OpenCode runtime settings.

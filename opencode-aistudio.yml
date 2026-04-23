@@ -1,68 +1,68 @@
-# opencode-aistudio 설정 파일입니다.
-# .env 대신 이 파일에서 앱 설정을 관리합니다.
-# 값을 바꾼 뒤에는 실행 중인 dev/start 서버를 다시 시작하세요.
+# opencode-aistudio configuration.
+# Edit this file to change local app behavior.
+# Restart the running dev/start server after changing this file.
 
 server:
-  # Express와 Vite가 함께 사용하는 웹 서버 포트입니다.
+  # Port used by the Express and Vite web server.
   port: 3000
 
-  # 프롬프트와 첨부 파일을 받을 때 허용하는 요청 본문 크기입니다.
+  # Maximum request body size for prompts and attachments.
   bodyLimit: 100mb
 
-  # 브라우저로 스트리밍할 최종 답변 텍스트의 최대 글자 수입니다.
+  # Maximum number of final-answer characters streamed to the browser.
   sseFinalTextLimit: 200000
 
-  # 브라우저로 스트리밍할 reasoning/thoughts 텍스트의 최대 글자 수입니다.
+  # Maximum number of reasoning/thoughts characters streamed to the browser.
   sseThoughtsTextLimit: 80000
 
 history:
-  # 로컬 실행 기록에 보관할 최대 항목 수입니다.
+  # Maximum number of local run-history entries to keep.
   maxEntries: 30
 
-  # 기록 파일에 저장할 최종 답변 텍스트의 최대 글자 수입니다.
+  # Maximum number of final-answer characters stored in the history file.
   storedFinalTextLimit: 200000
 
-  # 기록 파일에 저장할 reasoning/thoughts 텍스트의 최대 글자 수입니다.
+  # Maximum number of reasoning/thoughts characters stored in the history file.
   storedThoughtsTextLimit: 80000
 
-  # 기록 파일에 저장할 프롬프트, 시스템 지시문, 첨부 내용의 최대 글자 수입니다.
+  # Maximum number of prompt, system instruction, and attachment characters stored in history.
   storedAttachmentContentLimit: 120000
 
 gateway:
-  # OpenCode 게이트웨이가 메모리에 유지할 최종 답변 텍스트의 최대 글자 수입니다.
+  # Maximum number of final-answer characters retained by the OpenCode gateway.
   finalTextLimit: 200000
 
-  # OpenCode 게이트웨이가 메모리에 유지할 reasoning/thoughts 텍스트의 최대 글자 수입니다.
+  # Maximum number of reasoning/thoughts characters retained by the OpenCode gateway.
   thoughtsTextLimit: 80000
 
-  # 모델 실행 전체 타임아웃입니다. 단위는 밀리초입니다.
+  # Total model-run timeout in milliseconds.
   timeoutMs: 300000
 
-  # 프롬프트 전송이 끝난 뒤 idle 이벤트를 기다리는 시간입니다. 단위는 밀리초입니다.
+  # Time to wait for an idle event after prompt submission completes, in milliseconds.
   postPromptIdleGraceMs: 300000
 
 opencode:
-  # 관리형 OpenCode 런타임 디렉터리입니다. 비워두면 ~/.repovera/opencode-runtime을 사용합니다.
+  # Managed OpenCode runtime directory. Leave empty to use ~/.repovera/opencode-runtime.
   runtimeDir: ""
 
-  # 사용할 opencode 실행 파일 경로입니다. 비워두면 node_modules/.bin/opencode를 사용합니다.
+  # Path to the opencode executable. Leave empty to use node_modules/.bin/opencode.
   binaryPath: ""
 
-  # 복사해 사용할 OpenCode auth.json 경로입니다. 비워두면 기본 OS별 위치를 자동 탐색합니다.
+  # Path to the OpenCode auth.json file to copy. Leave empty to auto-detect OS defaults.
   authJsonPath: ""
 
-  # 관리형 OpenCode 서버 대신 실행할 사용자 지정 명령입니다. 일반 사용에서는 비워두세요.
+  # Custom command fallback instead of the managed OpenCode server. Leave empty for normal use.
   command: ""
 
-  # OpenCode 서버 시작을 기다리는 최대 시간입니다. 단위는 밀리초입니다.
+  # Maximum time to wait for the OpenCode server to start, in milliseconds.
   startTimeoutMs: 15000
 
-  # OpenCode 서버가 사용할 포트 검색 범위입니다.
+  # Port range used by the managed OpenCode server.
   portStart: 4097
   portEnd: 4197
 
-  # 내부 OpenCode 서버 Basic Auth 사용자명입니다.
+  # Basic Auth username for the internal OpenCode server.
   serverUsername: opencode
 
-  # 비워두면 실행할 때마다 내부 서버 비밀번호를 무작위로 생성합니다.
+  # Leave empty to generate a random internal server password on each run.
   serverPassword: ""
