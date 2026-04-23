@@ -61,7 +61,7 @@ Windows Command Prompt:
 run.cmd
 ```
 
-The default server URL is [http://localhost:3000](http://localhost:3000). You can change the port in [`opencode-aistudio.yml`](./opencode-aistudio.yml).
+The default server URL is [http://localhost:47831](http://localhost:47831). You can change the port in [`opencode-aistudio.yml`](./opencode-aistudio.yml).
 
 ## Configuration
 

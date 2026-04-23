@@ -77,7 +77,7 @@ run.cmd
 Default local URL:
 
 ```text
-http://localhost:3000
+http://localhost:47831
 ```
 
 ## Documentation

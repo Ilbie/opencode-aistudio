@@ -4,7 +4,7 @@
 
 server:
   # Port used by the Express and Vite web server.
-  port: 3000
+  port: 47831
 
   # Maximum request body size for prompts and attachments.
   bodyLimit: 100mb
@@ -36,10 +36,10 @@ gateway:
   thoughtsTextLimit: 80000
 
   # Total model-run timeout in milliseconds.
-  timeoutMs: 300000
+  timeoutMs: 900000
 
   # Time to wait for an idle event after prompt submission completes, in milliseconds.
-  postPromptIdleGraceMs: 300000
+  postPromptIdleGraceMs: 900000
 
 opencode:
   # Managed OpenCode runtime directory. Leave empty to use ~/.repovera/opencode-runtime.

@@ -61,7 +61,7 @@ Windows Command Prompt:
 run.cmd
 ```
 
-기본 서버 주소는 [http://localhost:3000](http://localhost:3000)입니다. 포트는 [`opencode-aistudio.yml`](./opencode-aistudio.yml)에서 바꿀 수 있습니다.
+기본 서버 주소는 [http://localhost:47831](http://localhost:47831)입니다. 포트는 [`opencode-aistudio.yml`](./opencode-aistudio.yml)에서 바꿀 수 있습니다.
 
 ## 설정
 
